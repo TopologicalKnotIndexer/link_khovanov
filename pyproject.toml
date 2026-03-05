@@ -1,0 +1,21 @@
+[project]
+name = "link-khovanov"
+version = "0.0.1"
+description = "solve khovanov for link for both directions of each component."
+authors = [
+    {name = "GGN_2015",email = "neko@jlulug.org"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "javakh_interface",
+    "pd_code_reverse_component",
+    "pd_code_sanity",
+    "pd_code_components"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
