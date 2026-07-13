@@ -1,6 +1,6 @@
 [project]
 name = "link-khovanov"
-version = "0.1.0"
+version = "0.1.1"
 description = "solve khovanov for link for both directions of each component."
 authors = [
     {name = "GGN_2015",email = "neko@jlulug.org"}

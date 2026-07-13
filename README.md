@@ -1,6 +1,6 @@
 # link-khovanov
 
-Compute distinct Khovanov values over all component orientations.
+Compute distinct integral Khovanov homologies across component orientations of a link.
 
 ## Installation
 
@@ -8,15 +8,37 @@ Compute distinct Khovanov values over all component orientations.
 pip install link-khovanov
 ```
 
-## Quick start
+## Usage example
 
-`from link_khovanov import link_khovanov` then `link_khovanov(pd_code)`.
+```python
+from link_khovanov import link_khovanov
 
-PD codes are lists of four-entry crossings. Each arc label must occur exactly twice. Functions validate their inputs and do not mutate caller-owned PD-code lists unless explicitly documented.
+hopf = [[2, 3, 1, 4], [4, 1, 3, 2]]
+for value in link_khovanov(hopf):
+    print(value)
+```
+
+## Algorithm
+
+The PD component graph is decomposed into oriented cycles. One global orientation is fixed because reversing every component simultaneously is redundant; the remaining `2^(n-1)` orientation representatives are evaluated and duplicate homology strings are removed. Computation is delegated in batches to the Khovanov backend to avoid starting a new compiler or process for every orientation.
+
+## Input conventions
+
+A PD code is represented as a list of four-entry crossings. Arc labels normally occur exactly twice. Public functions validate inputs and return new values rather than mutating caller-owned data unless their API explicitly says otherwise.
+
+## External software
+
+- A C++14 compiler is required by the Khovanov backend on first use.
+- No Java runtime is required.
 
 ## Development
 
-Use Python 3.10 or newer for Python packages. Build distributions with `poetry build`. Run the package's tests or examples before publishing. C++ projects require a modern standards-compliant compiler.
+Run examples and package checks before release. Python packages require Python 3.10 or newer. Build PyPI artifacts with:
+
+```bash
+poetry check
+poetry build
+```
 
 ## License
 
