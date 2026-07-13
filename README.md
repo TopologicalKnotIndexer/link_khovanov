@@ -20,7 +20,7 @@ for value in link_khovanov(hopf):
 
 ## Algorithm
 
-The PD component graph is decomposed into oriented cycles. One global orientation is fixed because reversing every component simultaneously is redundant; the remaining `2^(n-1)` orientation representatives are evaluated and duplicate homology strings are removed. Computation is delegated in batches to the Khovanov backend to avoid starting a new compiler or process for every orientation.
+The PD component graph is decomposed into oriented cycles. One global orientation is fixed because reversing every component simultaneously is redundant; the remaining `2^(n-1)` orientation representatives are converted to explicit crossing-sign rows. Identical rows, which occur for split components that never cross another component, are removed before the batch backend call. Duplicate homology strings are also removed from the final result. This avoids starting a native process for every orientation and avoids recomputing sign-equivalent cases.
 
 ## Input conventions
 
@@ -33,12 +33,13 @@ A PD code is represented as a list of four-entry crossings. Arc labels normally 
 
 ## Development
 
-Run examples and package checks before release. Python packages require Python 3.10 or newer. Build PyPI artifacts with:
+Python 3.10 or newer is required. Unit tests mock only the native Khovanov call while exercising real PD normalization and orientation enumeration:
 
 ```bash
-poetry check
-poetry build
+python -m unittest discover -s tests -v
 ```
+
+No PyPI publication is performed as part of repository maintenance.
 
 ## License
 

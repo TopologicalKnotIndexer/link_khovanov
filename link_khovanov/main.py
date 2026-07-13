@@ -61,6 +61,7 @@ def link_khovanov(pd_code: list[list[int]]) -> list[str]:
     component_of = {label: index for index, component in enumerate(components) for label in component}
     base = _base_crossing_signs(oriented)
     sign_rows = []
+    seen_rows = set()
     for mask in range(1 << max(0, len(components) - 1)):
         signs = base.copy()
         for index, (a, b, c, d) in enumerate(oriented):
@@ -69,5 +70,8 @@ def link_khovanov(pd_code: list[list[int]]) -> list[str]:
                 raise ValueError("crossing strands are inconsistent with components")
             if strand_a != strand_b and bool(mask & (1 << strand_a)) != bool(mask & (1 << strand_b)):
                 signs[index] = -signs[index]
-        sign_rows.append(signs)
+        key = tuple(signs)
+        if key not in seen_rows:
+            seen_rows.add(key)
+            sign_rows.append(signs)
     return sorted(set(javakh_interface.solve_signed_variants(oriented, sign_rows)))

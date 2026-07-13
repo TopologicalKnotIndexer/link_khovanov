@@ -10,7 +10,6 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "javakh-interface>=0.2.2",
-    "pd-code-reverse-component>=0.1.0",
     "pd-code-sanity>=0.1.0",
     "pd-code-components>=0.1.0",
     "pd-code-connected-sum>=0.1.0"
