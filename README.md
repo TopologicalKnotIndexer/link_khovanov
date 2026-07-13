@@ -1,19 +1,23 @@
-# link_khovanov
-solve khovanov for link for both directions of each component.
+# link-khovanov
 
-## Install
+Compute distinct Khovanov values over all component orientations.
+
+## Installation
 
 ```bash
 pip install link-khovanov
 ```
 
-## Usage
+## Quick start
 
-```python
-import link_khovanov
+`from link_khovanov import link_khovanov` then `link_khovanov(pd_code)`.
 
-pd_code = [[10, 1, 11, 2], [12, 3, 13, 4], [14, 19, 15, 20], [18, 7, 19, 8], [16, 5, 17, 6], [4, 15, 5, 16], [6, 17, 7, 18], [20, 13, 9, 14], [2, 9, 3, 10], [8, 11, 1, 12]]
+PD codes are lists of four-entry crossings. Each arc label must occur exactly twice. Functions validate their inputs and do not mutate caller-owned PD-code lists unless explicitly documented.
 
-for idx, line in enumerate(link_khovanov.link_khovanov(pd_code)):
-    print(f"{idx:02d}", line, "\n")
-```
+## Development
+
+Use Python 3.10 or newer for Python packages. Build distributions with `poetry build`. Run the package's tests or examples before publishing. C++ projects require a modern standards-compliant compiler.
+
+## License
+
+MIT. See `LICENSE`.
